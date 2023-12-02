@@ -4,16 +4,10 @@ function ResultDataList({ meanings }) {
 	if (!meanings) {
 		return null;
 	}
-	console.log(meanings[0]);
-	if (meanings[0].phonetics) {
-		console.log(meanings[0].phonetics.find((phonetic) => phonetic.audio));
-	}
 
 	return (
 		<div>
 			{meanings.map((val) => {
-				console.log(val);
-				console.log(val.phonetics.find((phonetic) => phonetic.audio).audio);
 				return val.meanings.map((meanings, index) => (
 					<div key={index}>
 						<h3>{meanings.partOfSpeech}</h3>
