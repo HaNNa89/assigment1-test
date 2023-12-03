@@ -55,8 +55,8 @@ const SearchInnerContainer = styled.div`
 
 const SearchInput = styled.input`
 	width: 40%;
-	height: 28px;
-	border: 2px solid;
+	height: 26px;
+	border: 2px solid #242424;
 	border-radius: 12px;
 `;
 const SearchButton = styled.button`
