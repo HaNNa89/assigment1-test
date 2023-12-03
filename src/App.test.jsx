@@ -13,20 +13,21 @@ describe("something truthy and falsy", () => {
 	});
 });
 
-//Syntax
-
+//Test to display if the Header with Dictionary.
 test('should display a header with the text "Dictionary"', () => {
 	render(<Header />);
 	const header = screen.getByText("Dictionary");
 	expect(header).toBeInTheDocument();
 });
 
+//Test to find the input placeholder.
 test("should find input placeholder text", () => {
 	render(<SearchBox />);
 	const input = screen.getByPlaceholderText("type your word here...");
 	expect(input).toBeInTheDocument();
 });
 
+//Test to find the Search Button.
 test("should display a button with the text: Search", () => {
 	render(<SearchBox />);
 	const button = screen.getByRole("button");
