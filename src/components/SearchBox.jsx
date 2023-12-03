@@ -5,12 +5,12 @@ function SearchBox({ inputValue, setInputValue }) {
 	const [value, setValue] = useState("");
 
 	const handleInputChange = (e) => setValue(e.target.value);
-
+	//Handle search a word when user cliked the button.
 	const handleSubmit = () => {
 		setInputValue(value);
 		setValue("");
 	};
-
+	//Handle searh a word if user press enter.
 	const handleInputKeyDown = (e) => {
 		if (e.key === "Enter") {
 			handleSubmit();
@@ -30,6 +30,7 @@ function SearchBox({ inputValue, setInputValue }) {
 				/>
 				<SearchButton onClick={handleSubmit}>Search</SearchButton>
 			</SearchInnerContainer>
+			{/*Display the word if its available*/}
 			{inputValue && (
 				<h2>
 					Result for: <span>{inputValue}</span>

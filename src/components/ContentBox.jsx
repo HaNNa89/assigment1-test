@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ResultDataList from "./ResultDataList";
 
+//This component handles fetching and display data
 function ContentBox({ inputValue }) {
 	const [response, setResponse] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -14,7 +15,7 @@ function ContentBox({ inputValue }) {
 			}
 			setErrorMessage("");
 			setLoading(true);
-
+			//Fetch data from  the used Dictionary API
 			try {
 				const response = await fetch(
 					`https://api.dictionaryapi.dev/api/v2/entries/en/${inputValue}`
@@ -39,6 +40,7 @@ function ContentBox({ inputValue }) {
 			{response && (
 				<div>
 					<h3>Definitions:</h3>
+					{/*Render the ResultDataList with the result*/}
 					<ResultDataList meanings={response} />
 				</div>
 			)}

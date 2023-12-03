@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 function Header() {
 	return (
+		//Titel för Dictionary app
 		<TopHeading>
 			<h1>Dictionary</h1>
 		</TopHeading>
