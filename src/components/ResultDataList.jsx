@@ -17,7 +17,7 @@ function ResultDataList({ meanings }) {
 							))}
 						</ul>
 						<div key={index}>
-							<h1>asdasd</h1>
+							<h3>Play sound</h3>
 							{val.phonetics && (
 								<audio
 									controls
