@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 function SearchBox({ inputValue, setInputValue }) {
 	const [value, setValue] = useState("");
@@ -17,23 +18,49 @@ function SearchBox({ inputValue, setInputValue }) {
 	};
 
 	return (
-		<div>
+		<SearchContainer>
 			<h4>Search for a word</h4>
-			<input
-				type="text"
-				placeholder="type your word here..."
-				onChange={handleInputChange}
-				value={value}
-				onKeyDown={handleInputKeyDown}
-			/>
-			<button onClick={handleSubmit}>Search</button>
-
+			<SearchInnerContainer>
+				<SearchInput
+					type="text"
+					placeholder="type your word here..."
+					onChange={handleInputChange}
+					value={value}
+					onKeyDown={handleInputKeyDown}
+				/>
+				<SearchButton onClick={handleSubmit}>Search</SearchButton>
+			</SearchInnerContainer>
 			{inputValue && (
 				<h2>
 					Result for: <span>{inputValue}</span>
 				</h2>
 			)}
-		</div>
+		</SearchContainer>
 	);
 }
+
+const SearchContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 10px;
+`;
+
+const SearchInnerContainer = styled.div`
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+`;
+
+const SearchInput = styled.input`
+	width: 40%;
+	height: 28px;
+	border: 2px solid;
+	border-radius: 12px;
+`;
+const SearchButton = styled.button`
+	height: 28px;
+`;
+
 export default SearchBox;
