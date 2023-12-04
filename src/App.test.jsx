@@ -48,3 +48,14 @@ test("should display a word when Search button is clicked", async () => {
 	const searchedWord = await screen.findByText("value");
 	expect(searchedWord).toBeInTheDocument();
 });
+
+test("should display a word when user press Enter on Search button ", async () => {
+	render(<App />);
+	const user = userEvent.setup();
+	const inputElement = screen.getByPlaceholderText("type your word here...");
+
+	await user.type(inputElement, "value");
+
+	const searchedWord = await screen.getByRole("button");
+	expect(searchedWord).toBeInTheDocument();
+});
