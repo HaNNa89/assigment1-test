@@ -1,61 +1,55 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { expect } from "vitest";
 import App from "./App";
 import Header from "./components/Header";
 import SearchBox from "./components/SearchBox";
 
-describe("something truthy and falsy", () => {
-	it("true to be true", () => {
-		expect(true).toBe(true);
-	});
-
-	it("false to be false", () => {
-		expect(false).toBe(false);
-	});
-});
-
-//Test to display if the Header with Dictionary.
+//Check if header is rendering with the name "Dictionary".
 test('should display a header with the text "Dictionary"', () => {
 	render(<Header />);
 	const header = screen.getByText("Dictionary");
 	expect(header).toBeInTheDocument();
 });
 
-//Test to find the input placeholder.
+//Check if input placeholder is rendering.
 test("should find input placeholder text", () => {
 	render(<SearchBox />);
 	const input = screen.getByPlaceholderText("type your word here...");
 	expect(input).toBeInTheDocument();
 });
 
-//Test to find the Search Button.
+//Check if Search Button is rendering.
 test("should display a button with the text: Search", () => {
 	render(<SearchBox />);
 	const button = screen.getByRole("button");
 	expect(button).toBeInTheDocument();
 });
 
+//Check if searched word is rendering if the button is clicked.
 test("should display a word when Search button is clicked", async () => {
 	render(<App />);
+	//set up user event
 	const user = userEvent.setup();
 	const inputElement = screen.getByPlaceholderText("type your word here...");
 	const buttonElement = screen.getByRole("button");
-
-	await user.type(inputElement, "value");
+	//Simulate when user is typing the word "color" and cliked the Search button.
+	await user.type(inputElement, "color");
 	await user.click(buttonElement);
-
-	const searchedWord = await screen.findByText("value");
+	//Verify if searched word "color" is in the document.
+	const searchedWord = await screen.findByText("color");
 	expect(searchedWord).toBeInTheDocument();
 });
 
+//Test if searched word is rendeing if the user press Enter.
 test("should display a word when user press Enter on Search button ", async () => {
 	render(<App />);
+	//set up user event
 	const user = userEvent.setup();
 	const inputElement = screen.getByPlaceholderText("type your word here...");
-
-	await user.type(inputElement, "value");
-
+	//Simulate when a user is typing the word "color" ande press Enter.
+	await user.type(inputElement, "color");
+	//Verify if searched word "color" is in the document.
 	const searchedWord = await screen.getByRole("button");
 	expect(searchedWord).toBeInTheDocument();
 });
