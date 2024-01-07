@@ -79,3 +79,20 @@ test("should display error message if user doesn't type a word", async () => {
 		() => expect(screen.getByText("Please type a word")).toBeInTheDocument
 	);
 });
+
+test("should render audio player correctly when user clicked play", async () => {
+	render(<App />);
+	const inputSearchElement = screen.getByPlaceholderText(
+		"type your word here..."
+	);
+	const buttonSearchElement = screen.getByRole("button", { name: "Search" });
+	const user = userEvent.setup();
+	await user.type(inputSearchElement, "code");
+	await user.click(buttonSearchElement);
+
+	await waitFor(() => {
+		const audioElement = screen.getByTestId("audio-player");
+		expect(audioElement).toBeInTheDocument();
+		expect(audioElement).toHaveAttribute("controls");
+	});
+});
