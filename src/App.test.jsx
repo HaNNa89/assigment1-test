@@ -80,6 +80,7 @@ test("should display error message if user doesn't type a word", async () => {
 	);
 });
 
+//Test if audio player rendered correctly when user is cliks play
 test("should render audio player correctly when user clicked play", async () => {
 	render(<App />);
 	const inputSearchElement = screen.getByPlaceholderText(
@@ -87,9 +88,10 @@ test("should render audio player correctly when user clicked play", async () => 
 	);
 	const buttonSearchElement = screen.getByRole("button", { name: "Search" });
 	const user = userEvent.setup();
+	//Simulate when a user is searching for "code and click"
 	await user.type(inputSearchElement, "code");
 	await user.click(buttonSearchElement);
-
+	// Wait for the audio player to be rendered
 	await waitFor(() => {
 		const audioElement = screen.getByTestId("audio-player");
 		expect(audioElement).toBeInTheDocument();
