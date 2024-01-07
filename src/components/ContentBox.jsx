@@ -34,7 +34,7 @@ function ContentBox({ inputValue }) {
 	return (
 		<div>
 			{loading && <p>Searching word...</p>}
-			{errorMessage && <p>{errorMessage}</p>}
+			{errorMessage && <p data-testid="error-message">{errorMessage}</p>}
 			{response && (
 				<div>
 					<h3>Result for searched word:</h3>
