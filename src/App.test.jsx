@@ -54,18 +54,22 @@ test("should display a word when user press Enter on Search button ", async () =
 	expect(searchedWord).toBeInTheDocument();
 });
 
+//Test if error message displayed when searched word does not exist
 test("should display error message when searched word does not exist", async () => {
 	render(<App />);
 	const user = userEvent.setup();
 	const input = screen.getByPlaceholderText("type your word here...");
 	const searchBtn = screen.getByRole("button", { name: "Search" });
+	//Simulate when a user is typing a word "tårta" which doesn't exist"
 	await user.type(input, "tårta");
 	await user.click(searchBtn);
+	//User see the error message
 	await waitFor(
 		() => expect(screen.getByTestId("error-message")).toBeInTheDocument
 	);
 });
 
+//Test if error message displayed when user doesn´t type a word
 test("should display error message if user doesn't type a word", async () => {
 	render(<SearchBox />);
 	const user = userEvent.setup();
