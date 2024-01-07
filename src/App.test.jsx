@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect } from "vitest";
 import App from "./App";
@@ -52,4 +52,16 @@ test("should display a word when user press Enter on Search button ", async () =
 	//Verify if searched word "color" is in the document.
 	const searchedWord = await screen.getByRole("button");
 	expect(searchedWord).toBeInTheDocument();
+});
+
+test("should display error message when searched word does not exist", async () => {
+	render(<App />);
+	const user = userEvent.setup();
+	const input = screen.getByPlaceholderText("type your word here...");
+	const searchBtn = screen.getByRole("button", { name: "Search" });
+	await user.type(input, "tårta");
+	await user.click(searchBtn);
+	await waitFor(
+		() => expect(screen.getByTestId("error-message")).toBeInTheDocument
+	);
 });
