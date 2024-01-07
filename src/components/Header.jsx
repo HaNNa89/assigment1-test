@@ -1,19 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 function Header() {
 	return (
 		//Titel för Dictionary app
-		<TopHeading>
+		<div>
 			<h1>Dictionary</h1>
-		</TopHeading>
+		</div>
 	);
 }
-
-const TopHeading = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 30px;
-`;
 
 export default Header;

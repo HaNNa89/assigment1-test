@@ -1,69 +1,100 @@
 import React from "react";
 
-function ResultDataList({ meanings }) {
-	if (!meanings) {
+function ResultDataList({ searchingResult }) {
+	if (!searchingResult) {
 		return null;
 	}
 
 	return (
 		<div>
-			{/*Map each meanings for the searched word*/}
-			{meanings.map((val) => {
-				return val.meanings.map((meanings, index) => (
-					<div key={index}>
-						<h3>{meanings.partOfSpeech}</h3>
-						<ul>
-							{/*Display Definitions*/}
-							{meanings.definitions.map((def) => (
-								<li key={def.definition}>{def.definition}</li>
-							))}
-						</ul>
-						<div key={index}>
-							{/*Display audio for a word if its available*/}
-							<h3>Play sound</h3>
-							{val.phonetics && (
-								<audio
-									controls
-									src={val.phonetics.find((phonetic) => phonetic.audio).audio}
-									type="audio/mpeg"
-								></audio>
-							)}
-						</div>
+			{/* WORD */}
+			<p>{searchingResult[0].word}</p>
 
-						{meanings.synonyms && (
-							<>
-								{/*Display Synonyms*/}
-								<h3>Synonyms:</h3>
-								<ul>
-									{meanings.synonyms.map((syn, index) => (
-										<li key={index}>{syn}</li>
-									))}
-								</ul>
-							</>
-						)}
-						{meanings.antonyms && (
-							<>
-								{/*Display Antonyms*/}
-								<h3>Antonyms:</h3>
-								<ul>
-									{meanings.antonyms.map((ant, index) => (
-										<li key={index}>{ant}</li>
-									))}
-								</ul>
-							</>
-						)}
-						{meanings.example && (
-							<>
-								{/*Display Example*/}
-								<h3>Example:</h3>
-								<ul>
-									<li key={meanings.example}>{meanings.example}</li>
-								</ul>
-							</>
-						)}
+			{/*PHONETICS*/}
+			<p>Phonetic</p>
+			{searchingResult[0].phonetics.slice(0, 5).map((phonetic, index) => (
+				<div key={`${phonetic.text}-${index}`}>
+					<p>{phonetic.text}</p>
+					{phonetic.audio && (
+						<audio controls key={`${phonetic.text}-${index}`}>
+							<source src={phonetic.audio} type="audio/mpeg" />
+							Your browser does not support the audio element.
+						</audio>
+					)}
+
+					{phonetic.sourceUrl && <p>{phonetic.sourceUrl}</p>}
+					{phonetic.license && (
+						<div>
+							<p>License name: {phonetic.license.name}</p>
+							<p>License url: {phonetic.license.url}</p>
+						</div>
+					)}
+				</div>
+			))}
+
+			{/*MEANINGS*/}
+			<p>Meaning</p>
+			{searchingResult[0].meanings.map((meaning, index) => (
+				<div key={index}>
+					<p>{meaning.partOfSpeech}</p>
+					{meaning.definitions.map((definition, idx) => (
+						<div key={idx}>
+							{definition.definition}
+							{definition.exemple && <p>Exemple: {definition.exemple}</p>}
+						</div>
+					))}
+				</div>
+			))}
+
+			{/*SYNONYMS*/}
+			<p>Synonyms</p>
+			{searchingResult[0].meanings.map((meaning, index) => (
+				<div key={index}>
+					{meaning.synonyms && meaning.synonyms.length > 0 && (
+						<div>
+							{meaning.synonyms.map((synonym, idx) => (
+								<div key={idx}>{synonym}</div>
+							))}
+						</div>
+					)}
+				</div>
+			))}
+
+			{/*ANTONYMS*/}
+			<p>Antonyms</p>
+			{searchingResult[0].meanings.map((meaning, index) => (
+				<div key={index}>
+					{meaning.antonyms && meaning.antonyms.length > 0 && (
+						<div>
+							{meaning.antonyms.map((antonym, idx) => (
+								<div key={idx}>{antonym}</div>
+							))}
+						</div>
+					)}
+				</div>
+			))}
+
+			{/*LICENSE*/}
+			<p>License</p>
+			{searchingResult[0].license && (
+				<div>
+					<p>License name: {searchingResult[0].license.name}</p>
+					<p>License url: {searchingResult[0].license.url}</p>
+				</div>
+			)}
+
+			{/*SOURCE URL:S*/}
+			<p>Source url</p>
+			{searchingResult[0].sourceUrl &&
+				searchingResult[0].sourceUrl.length > 0 && (
+					<div>
+						{searchingResult[0].sourceUrl.map((url, index) => (
+							<div key={index}>
+								<p>{url}</p>
+							</div>
+						))}
 					</div>
-				));
-			})}
+				)}
 		</div>
 	);
 }
