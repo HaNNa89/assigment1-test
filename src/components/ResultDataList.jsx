@@ -8,10 +8,10 @@ function ResultDataList({ searchingResult }) {
 	return (
 		<div>
 			{/* WORD */}
-			<p>{searchingResult[0].word}</p>
+			<h2>{searchingResult[0].word}</h2>
 
 			{/*PHONETICS*/}
-			<p>Phonetic</p>
+			<h3>Phonetic</h3>
 			{searchingResult[0].phonetics.slice(0, 5).map((phonetic, index) => (
 				<div key={`${phonetic.text}-${index}`}>
 					<p>{phonetic.text}</p>
@@ -37,7 +37,7 @@ function ResultDataList({ searchingResult }) {
 			))}
 
 			{/*MEANINGS*/}
-			<p>Meaning</p>
+			<h3>Meaning</h3>
 			{searchingResult[0].meanings.map((meaning, index) => (
 				<div key={index}>
 					<p>{meaning.partOfSpeech}</p>
@@ -51,7 +51,7 @@ function ResultDataList({ searchingResult }) {
 			))}
 
 			{/*SYNONYMS*/}
-			<p>Synonyms</p>
+			<h3>Synonyms</h3>
 			{searchingResult[0].meanings.map((meaning, index) => (
 				<div key={index}>
 					{meaning.synonyms && meaning.synonyms.length > 0 && (
@@ -65,7 +65,7 @@ function ResultDataList({ searchingResult }) {
 			))}
 
 			{/*ANTONYMS*/}
-			<p>Antonyms</p>
+			<h3>Antonyms</h3>
 			{searchingResult[0].meanings.map((meaning, index) => (
 				<div key={index}>
 					{meaning.antonyms && meaning.antonyms.length > 0 && (
@@ -79,7 +79,7 @@ function ResultDataList({ searchingResult }) {
 			))}
 
 			{/*LICENSE*/}
-			<p>License</p>
+			<h3>License</h3>
 			{searchingResult[0].license && (
 				<div>
 					<p>License name: {searchingResult[0].license.name}</p>
@@ -88,7 +88,7 @@ function ResultDataList({ searchingResult }) {
 			)}
 
 			{/*SOURCE URL:S*/}
-			<p>Source url</p>
+			<h3>Source url</h3>
 			{searchingResult[0].sourceUrl &&
 				searchingResult[0].sourceUrl.length > 0 && (
 					<div>
