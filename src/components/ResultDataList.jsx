@@ -16,7 +16,11 @@ function ResultDataList({ searchingResult }) {
 				<div key={`${phonetic.text}-${index}`}>
 					<p>{phonetic.text}</p>
 					{phonetic.audio && (
-						<audio controls key={`${phonetic.text}-${index}`}>
+						<audio
+							data-testid="audio-player"
+							controls
+							key={`${phonetic.text}-${index}`}
+						>
 							<source src={phonetic.audio} type="audio/mpeg" />
 							Your browser does not support the audio element.
 						</audio>
